@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+
+<body>
+	
+	<div><thead>
+		<tr>
+			<th>Numero de Vuelo</th>
+			<th>Origen</th>
+			<th>Destino</th>
+			<th>Nombre del Avion</th>
+			<th>Valor del asiento</th>
+			
+		</tr>
+		
+	</thead>
+	
+	<tbody>
+		<tr th:each=" vuelo = ${lista}">
+		<form th:object="${vuelo} " th:method = "get">
+		
+			<td th:text="${vuelo.numero}"></td>
+			<td th:text="${vuelo.origen}"></td>
+			<td th:text="${vuelo.destino}"></td>
+			<td th:text="${vuelo.avion.nombre}"></td>
+			<td th:text="${vuelo.valorAsiento}"></td>
+			
+	</tbody>
+
+</div>
+
+	<div>
+	<form th:action="@{/vuelos/reservar}" th:object="${compraPasaje}" th:method="get">
+
+		<table class="table table-striped-columns">
+			<tr>
+				<td>
+					<label> Cantidad de Asientos</label>
+				</td>
+				<td>
+					<input type="text" id= "origen" th:field= "${compraPasaje.cantidadAsientosComprados}"</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<label> Cedula Cliente</label>
+				</td>
+				<td>
+					<input type="text" id= "destino" th:field= "${compraPasaje.cliente.cedula}"</td>
+			</tr>
+					</table>
+		<input type="submit" value="Buscar" >
+	</form>
+	</div>
+		</body>
+
+</html>
